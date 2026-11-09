@@ -1,0 +1,515 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Daily Site Diary | Construction Project</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="topbar">
+
+        <div class="brand-mark">DSD</div>
+
+        <div>
+            <h1>Daily Site Diary</h1>
+            <p>Construction activities • Site records</p>
+        </div>
+
+        <div class="top-date" id="todayLabel"></div>
+
+    </header>
+
+
+    <main class="shell">
+
+        <!-- LOGIN SECTION -->
+        <section id="loginView" class="panel login-panel">
+
+            <div class="eyebrow">
+                SITE RECORDING SYSTEM
+            </div>
+
+            <h2>Welcome back</h2>
+
+            <p class="muted">
+                Select your position to open the relevant daily activity form.
+            </p>
+
+
+            <form id="loginForm">
+
+                <label for="role">Position</label>
+
+                <select id="role" required>
+
+                    <option value="">Select position</option>
+
+                    <option value="Documentation Officer">
+                        Documentation Officer
+                    </option>
+
+                    <option value="Environmental Health and Safety / Social">
+                        Environmental Health and Safety / Social
+                    </option>
+
+                    <option value="Foreman">
+                        Foreman
+                    </option>
+
+                    <option value="Lab Technician">
+                        Lab Technician
+                    </option>
+
+                    <option value="Surveyor">
+                        Surveyor
+                    </option>
+
+                </select>
+
+
+                <label for="staffName">Your name</label>
+
+                <input
+                    id="staffName"
+                    type="text"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+
+                <!-- DOCUMENTATION OFFICER PASSWORD -->
+
+                <div id="passwordWrap" class="hidden">
+
+                    <label for="password">
+                        Documentation Officer password
+                    </label>
+
+                    <input
+                        id="password"
+                        type="password"
+                        placeholder="Enter password"
+                        autocomplete="current-password"
+                    >
+
+                </div>
+
+
+                <button class="primary full" type="submit">
+
+                    Continue to diary
+
+                    <span>→</span>
+
+                </button>
+
+            </form>
+
+
+            <p class="login-note">
+
+                Field staff sign in using their position and name.
+                The Documentation Officer account requires a password.
+
+            </p>
+
+
+            <p id="loginError" class="error" role="alert"></p>
+
+        </section>
+
+
+
+        <!-- MAIN APPLICATION -->
+
+        <section id="appView" class="hidden">
+
+
+            <!-- USER DASHBOARD HEADER -->
+
+            <div class="welcome-row">
+
+                <div>
+
+                    <div class="eyebrow">
+                        DAILY RECORDING
+                    </div>
+
+                    <h2 id="roleHeading">
+                        Activity entry
+                    </h2>
+
+                    <p class="muted" id="signedInAs"></p>
+
+                </div>
+
+
+                <button id="logoutBtn" class="secondary">
+
+                    Log out
+
+                </button>
+
+            </div>
+
+
+
+            <!-- ACTIVITY RECORDING FORM -->
+
+            <section id="entryPanel" class="panel">
+
+                <div class="panel-heading">
+
+                    <div>
+
+                        <h3>Record site activity</h3>
+
+                        <p class="muted">
+                            Complete the fields below.
+                            The date is recorded automatically.
+                        </p>
+
+                    </div>
+
+
+                    <span class="date-chip" id="formDate"></span>
+
+                </div>
+
+
+
+                <form id="activityForm">
+
+
+                    <div class="form-grid">
+
+
+                        <!-- ACTIVITY TYPE -->
+
+                        <div class="field full-width">
+
+                            <label for="activityType">
+                                Activity
+                            </label>
+
+                            <select id="activityType" required>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- LAYER NUMBER -->
+
+                        <div class="field hidden" id="layerField">
+
+                            <label for="layer">
+                                Layer number
+                            </label>
+
+                            <select id="layer">
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- LOCATION -->
+
+                        <div class="field">
+
+                            <label for="location">
+                                Location / Chainage
+                            </label>
+
+                            <input
+                                id="location"
+                                type="text"
+                                placeholder="e.g. Camp Site, Km 0+740 - Km 4+000 LHS"
+                                required
+                            >
+
+                            <small>
+
+                                Example: Camp Site,
+                                Km 0+740 - Km 4+000 LHS
+                                or Km 0+740 - Km 44+000 RHS.
+
+                            </small>
+
+                        </div>
+
+
+
+                        <!-- ADDITIONAL DETAILS -->
+
+                        <div class="field full-width">
+
+                            <label for="details">
+                                Additional details (optional)
+                            </label>
+
+                            <textarea
+                                id="details"
+                                rows="3"
+                                placeholder="Add details, quantities, observations, or other work such as lab construction..."
+                            ></textarea>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- FORM BUTTONS -->
+
+                    <div class="form-actions">
+
+                        <button type="reset" class="secondary">
+
+                            Clear form
+
+                        </button>
+
+
+                        <button type="submit" class="primary">
+
+                            Save activity
+
+                            <span>✓</span>
+
+                        </button>
+
+                    </div>
+
+
+                    <p id="saveMessage" class="success" role="status"></p>
+
+
+                </form>
+
+            </section>
+
+
+
+            <!-- DOCUMENTATION OFFICER RECORDS DASHBOARD -->
+
+            <section id="recordsPanel" class="panel hidden">
+
+
+                <div class="panel-heading">
+
+                    <div>
+
+                        <h3>All uploaded site activities</h3>
+
+                        <p class="muted">
+
+                            Review records submitted by all positions on this device.
+
+                        </p>
+
+                    </div>
+
+
+                    <span class="count-chip" id="recordCount">
+
+                        0 records
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- SEARCH AND FILTER -->
+
+                <div class="toolbar">
+
+                    <input
+                        id="searchRecords"
+                        type="search"
+                        placeholder="Search name, activity, location..."
+                    >
+
+
+                    <input
+                        id="filterDate"
+                        type="date"
+                        aria-label="Filter by date"
+                    >
+
+
+                    <button id="clearFilter" class="secondary">
+
+                        Clear filters
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- ACTIVITIES TABLE -->
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Date</th>
+
+                                <th>Staff member</th>
+
+                                <th>Position</th>
+
+                                <th>Activity</th>
+
+                                <th>Layer</th>
+
+                                <th>Location</th>
+
+                                <th>Details</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="recordsBody">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+
+                <div id="emptyRecords" class="empty-state hidden">
+
+                    No activity records have been submitted yet.
+
+                </div>
+
+
+
+                <!-- EXPORT AND IMPORT OPTIONS -->
+
+                <div class="form-actions export-actions">
+
+
+                    <button id="exportCsv" class="primary">
+
+                        Export all records (CSV)
+
+                    </button>
+
+
+                    <button id="exportJson" class="secondary">
+
+                        Download backup (JSON)
+
+                    </button>
+
+
+                    <label class="upload-button secondary" for="importFile">
+
+                        Import backup (JSON)
+
+                    </label>
+
+
+                    <input
+                        id="importFile"
+                        type="file"
+                        accept=".json,application/json"
+                        class="hidden"
+                    >
+
+                </div>
+
+
+
+                <p class="login-note">
+
+                    Import adds records from a previously exported
+                    JSON backup. It does not replace existing records.
+
+                </p>
+
+
+            </section>
+
+
+
+            <!-- PERSONAL SUBMISSION HISTORY -->
+
+            <section id="myRecordsPanel" class="panel">
+
+
+                <div class="panel-heading">
+
+                    <div>
+
+                        <h3>My recent submissions</h3>
+
+                        <p class="muted">
+
+                            Your latest saved activities.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div id="myRecords" class="my-records">
+
+                </div>
+
+
+            </section>
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        Daily Site Diary
+
+        <span>•</span>
+
+        Local prototype
+
+    </footer>
+
+
+
+    <!-- JAVASCRIPT FILE -->
+
+    <script src="app.js"></script>
+
+
+</body>
+</html>
